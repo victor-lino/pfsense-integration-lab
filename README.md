@@ -1,33 +1,60 @@
-Redirecionamento do Modem — Mapeamento da porta 1195/UDP no modem da Vivo direcionada ao pfSense.
+# 🛡️ Home Lab: Integração de Segurança de Borda e Infraestrutura Híbrida (pfSense, OpenVPN, Active Directory e Monitoramento)
 
-Console do pfSense — Terminal exibindo o status de funcionamento e os IPs das interfaces WAN e LAN.
+## 📝 Sobre o Projeto
+Este laboratório documenta a consolidação e a evolução de projetos de infraestrutura anteriores (**Active Directory, DNS, File Server e GPOs** junto à camada de observabilidade com **Zabbix e Grafana**). 
 
-Regras Gerais do Firewall — Interface web do pfSense detalhando as permissões e regras da WAN.
+O objetivo principal deste cenário foi implementar e validar um ecossistema completo de segurança de borda utilizando o **pfSense** como firewall/gateway central. A prova de conceito (PoC) consistiu em interconectar de forma totalmente segura uma máquina remota externa (ambiente de trabalho) à infraestrutura local residencial virtualizada através de um túnel VPN, garantindo a governança, filtragem de tráfego e entrega de recursos internos da rede.
 
-Estatísticas do Web Filter — Tela inicial do pfBlockerNG mostrando volumetria de pacotes limpos e filtrados por DNS.
+---
 
-Logs em Tempo Real — Janela do terminal monitorando ativamente os daemons e logs de segurança do pfSense.
+## 🛠️ Tecnologias e Serviços Utilizados
+* **Firewall & Roteamento:** pfSense (Virtualizado via VMware)
+* **Segurança de Borda & Filtro Web:** pfBlockerNG (Filtragem de conteúdo em camada de DNS)
+* **Conectividade Segura:** OpenVPN (Protocolo criptografado via túnel UDP)
+* **Serviços de Diretório e Arquivos:** Windows Server (Active Directory, DNS interno, File Server com cotas e GPOs)
+* **Observabilidade & Métricas:** Zabbix Server (Ambiente Linux Ubuntu) integrado ao Grafana Dashboards
 
-Políticas Avançadas de Firewall — Detalhes adicionais das regras internas de tráfego e tratamento de portas.
+---
 
-Regras da Interface VPN — Isolamento do tráfego interno e liberação de pacotes vindos exclusivamente da rede OpenVPN.
+## 📐 Topologia e Arquitetura do Fluxo Técnico
 
-Status da VPN — Janela do OpenVPN GUI ativa na máquina de trabalho comprovando o túnel fechado.
+O laboratório foi estruturado em etapas sequenciais para simular fielmente uma infraestrutura de produção corporativa:
 
-Navegador via VPN — Acesso à interface web do roteador residencial diretamente do navegador da máquina externa.
+### 1. Borda e Segmentação de Interfaces
+A requisição externa bate inicialmente no modem de borda da operadora. Para viabilizar a entrada do tráfego sem comprometer os demais dispositivos domésticos, o tráfego da porta `1195/UDP` foi redirecionado exclusivamente ao IP WAN do firewall. O pfSense atua dividindo a estrutura: isolando a LAN do laboratório (`192.168.244.1/24`) e gerenciando o tráfego externo.
 
-Validação RDP — Configuração ou status do protocolo de desktop remoto (3389) passando por dentro do túnel.
+### 2. Políticas de Firewall e Filtro Web por DNS
+Dentro do painel do gateway, regras estritas foram aplicadas à interface da VPN, mitigando vetores de ataque e liberando apenas portas essenciais para serviços de infraestrutura (como DNS e conexões RDP). Paralelamente, o ecossistema conta com proteção na camada de aplicação através do pfBlockerNG, que analisa e mitiga requisições de anúncios, rastreadores e ameaças conhecidas (malwares/phishing). Os logs são validados e auditados em tempo real diretamente via console do core do firewall.
 
-Teste de Comunicação (ICMP) — Prompt de comando executando ping com resposta imediata para o domínio local.
+### 3. Conectividade Remota e Validação de Domínio (PoC)
+Com o túnel estabelecido via cliente OpenVPN GUI a partir do host externo, a comunicação torna-se totalmente transparente:
+* **Conectividade:** Testes de ping confirmam o tráfego fluindo de ponta a ponta com a resolução do DNS local para o domínio do Home Lab (`santechsous.local`).
+* **Identidade:** A máquina remota passa a autenticar e responder sob as credenciais de segurança e privilégios administrativos do Active Directory.
+* **Acesso a Recursos:** Unidades e mapeamentos de rede via caminhos UNC (`\\santechsous-ad`) são montados automaticamente, concedendo acesso seguro às pastas do File Server (como diretórios financeiros e diretórios de sistema `sysvol`), juntamente com a aplicação de GPOs complexas (como a GPO de atualização de papel de parede corporativo).
 
-Validação de Domínio — Comando whoami exibindo a conta administrativa ativa dentro do ecossistema santechsous.
+### 4. Monitoramento e Observabilidade
+Para garantir a saúde, alta disponibilidade e análise de tráfego de todo o laboratório, agentes e contadores coletam métricas constantemente para o Zabbix Server. Os dados são consolidados em dashboards dinâmicos no Grafana, entregando visibilidade detalhada do comportamento da rede em tempo real.
 
-Diretórios Compartilhados — Explorador de Arquivos mapeando o File Server corporativo e partições como Financeiro.
+---
 
-Mapeamento Remoto Detalhado — Visualização expandida das unidades de rede e diretórios de sistema (sysvol, etc.) ativos.
+## 📸 Documentação Visual (Evidências Práticas)
 
-Estrutura de Pastas do AD — Validação do acesso às árvores de arquivos locais via caminho UNC.
+### 🟢 Bloco 1: A Borda e a Entrada da Rede Doméstica
 
-Ambiente de Monitoramento (Zabbix) — Dashboard principal com o mapeamento e status dos hosts e agentes ativos.
+#### Redirecionamento do Modem
+![Redirecionamento do Modem](./img/1.png)  
+*Mapeamento da porta 1195/UDP no modem da Vivo direcionada ao pfSense.*
 
-Dashboards Dinâmicos (Grafana) — Painéis e gráficos visuais consolidados para análise de performance de infraestrutura.
+#### Console do pfSense
+![Console do pfSense](./img/2.png)  
+*Terminal exibindo o status de funcionamento e os IPs das interfaces WAN e LAN.*
+
+---
+
+### 🛡️ Bloco 2: Segurança, Firewall e Regras Internas
+
+#### Regras Gerais do Firewall
+![Regras Gerais do Firewall](./img/3.png)  
+*Interface web do pfSense detalhando as permissões e regras da WAN.*
+
+#### Estatísticas do
