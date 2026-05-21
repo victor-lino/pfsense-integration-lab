@@ -5,7 +5,6 @@
 ### 🟢 Bloco 1: A Borda e a Entrada da Rede Doméstica
 
 #### Redirecionamento do Modem
-[Redirecionamento do Modem] 
 *Redirecionamento do Modem - Mapeamento da porta 1195/UDP no modem da Vivo direcionada ao pfSense.*
 
 #### Console do pfSense
