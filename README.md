@@ -47,7 +47,7 @@
 ### 🗄️ Bloco 4: Validação de Identidade e Recursos (Active Directory e File Server)
 
 #### Teste de Comunicação (ICMP)
-*Teste de Comunicação (ICMP) - Prompt de comando executing ping com resposta imediata para o domínio local.*
+*Teste de Comunicação (ICMP) — Prompt de comando executando ping com resposta imediata para o domínio local.*
 
 #### Validação de Domínio
 *Validação de Domínio - Comando whoami exibindo a conta administrativa ativa dentro do ecossistema santechsous.*
