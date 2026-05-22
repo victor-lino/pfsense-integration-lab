@@ -149,3 +149,9 @@ No real credentials, certificates, tokens or sensitive public IP information are
 # Notes
 
 This project was developed for educational, documentation and portfolio purposes.
+
+---
+
+Author
+
+Victor Lino
