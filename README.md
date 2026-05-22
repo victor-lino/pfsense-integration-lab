@@ -82,6 +82,7 @@ A remote workstation connected through OpenVPN was able to:
 /diagrams
 /docs
 /firewall
+/images
 /monitoring
 /troubleshooting
 /validation
