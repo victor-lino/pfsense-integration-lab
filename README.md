@@ -1,74 +1,84 @@
----
+# pfSense Hybrid Infrastructure Lab
 
-## 📸 Documentação Visual (Evidências Práticas)
+## Overview
 
-### 🟢 Bloco 1: A Borda e a Entrada da Rede Doméstica
+This project was developed to simulate a hybrid enterprise infrastructure environment focused on:
 
-#### Redirecionamento do Modem
-[Redirecionamento do Modem] 
-*Redirecionamento do Modem - Mapeamento da porta 1195/UDP no modem da Vivo direcionada ao pfSense.*
+- Network security
+- Firewall administration
+- Secure remote access
+- Monitoring and observability
+- Infrastructure troubleshooting
 
-#### Console do pfSense
-[Console do pfSense] 
-*Console do pfSense - Terminal exibindo o status de funcionamento e os IPs das interfaces WAN e LAN.*
-
----
-
-### 🛡️ Bloco 2: Segurança, Firewall e Regras Internas
-
-#### Regras Gerais do Firewall
-*Regras Gerais do Firewall - Interface web do pfSense detalhando as permissões e regras da WAN.*
-
-#### Estatísticas do Web Filter
-*Estatísticas do Web Filter - Tela inicial do pfBlockerNG mostrando volumetria de pacotes limpos e filtrados por DNS.*
-
-#### Logs em Tempo Real
-*Logs em Tempo Real - Janela do terminal monitorando ativamente os daemons e logs de segurança do pfSense.*
-
-#### Políticas Avançadas de Firewall
-*Políticas Avançadas de Firewall - Detalhes adicionais das regras internas de tráfego e tratamento de portas.*
-
-#### Regras da Interface VPN
-*Regras da Interface VPN - Isolamento do tráfego interno e liberação de pacotes vindos exclusivamente da rede OpenVPN.*
+The lab integrates pfSense, OpenVPN, Zabbix, Grafana and Active Directory services into a centralized environment.
 
 ---
 
-### 🌐 Bloco 3: Fechamento do Túnel e Conectividade Externa (Trabalho ➡️ Casa)
+# Architecture
 
-#### Status da VPN
-*Status da VPN - Janela do OpenVPN GUI ativa na máquina de trabalho comprovando o túnel fechado.*
+## Core Technologies
 
-#### Navegador via VPN
-*Navegador via VPN - Acesso à interface web do roteador residencial diretamente do navegador da máquina externa.*
-
-#### Validação RDP
-*Validação RDP - Configuração ou status do protocolo de desktop remoto (3389) passando por dentro do túnel.*
-
----
-
-### 🗄️ Bloco 4: Validação de Identidade e Recursos (Active Directory e File Server)
-
-#### Teste de Comunicação (ICMP)
-*Teste de Comunicação (ICMP) - Prompt de comando executando ping com resposta imediata para o domínio local.*
-
-#### Validação de Domínio
-*Validação de Domínio - Comando whoami exibindo a conta administrativa ativa dentro do ecossistema santechsous.*
-
-#### Diretórios Compartilhados
-*Diretórios Compartilhados - Explorador de Arquivos mapeando o File Server corporativo e partições como Financeiro.*
-
-#### Mapeamento Remoto Detalhado
-*Mapeamento Remoto Detalhado - Visualização expandida das unidades de rede e diretórios de sistema (sysvol, etc.) ativos.*
-
-#### Estrutura de Pastas do AD
-*Estrutura de Pastas do AD - Validação do acesso às árvores de arquivos locais via caminho UNC.*
+- pfSense
+- OpenVPN
+- pfBlockerNG
+- Zabbix
+- Grafana
+- Active Directory
+- DNS
+- File Server
 
 ---
 
-### 📊 Bloco 5: Observabilidade e Monitoramento de Ativos
+# Main Features
 
-#### Ambiente de Monitoramento (Zabbix)
-*Ambiente de Monitoramento (Zabbix) - Dashboard principal com o mapeamento e status dos hosts e agentes ativos.*
+## Firewall and Segmentation
+- WAN/LAN/VPN segmentation
+- Controlled access policies
+- NAT configuration
+- Secure inbound exposure
 
-#### Dashboards Dinâmicos (Grafana)
-*Dashboards Dinâmicos (Grafana) - Painéis e gráficos visuais consolidados para análise de performance de infraestrutura.*
+## VPN Connectivity
+- OpenVPN remote access
+- Internal DNS resolution
+- RDP access through VPN
+- Secure encrypted communication
+
+## Monitoring and Observability
+- pfSense monitoring through Zabbix
+- Grafana dashboards
+- Traffic visibility
+- Infrastructure metrics
+
+## DNS Filtering
+- DNSBL filtering with pfBlockerNG
+- Threat mitigation
+- Advertisement blocking
+
+---
+
+# Proof of Concept
+
+The environment successfully simulated a real-world remote access scenario.
+
+A remote workstation connected through OpenVPN was able to:
+
+- Access internal virtual machines
+- Resolve internal DNS
+- Authenticate with Active Directory
+- Access File Server resources
+- Validate GPO application
+- Establish RDP communication
+
+---
+
+# Repository Structure
+
+```text
+/diagrams
+/docs
+/firewall
+/vpn
+/monitoring
+/troubleshooting
+/architecture
+/screenshots
