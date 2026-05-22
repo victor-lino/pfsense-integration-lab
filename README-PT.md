@@ -82,6 +82,7 @@ Uma estação de trabalho remota conectada via OpenVPN foi capaz de:
 /diagramas
 /docs
 /firewall
+/imagens
 /monitoramento
 /soluçãodeproblemas
 /validação
